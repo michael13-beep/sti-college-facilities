@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>STI College</title>
+  <title>STI College Facilities</title>
   <link rel="icon" href="./sti-logo.png" />
 
   <style>
@@ -469,7 +469,9 @@
       will-change: transform;
     }
 
-    .facility-card {
+    .facility-card,
+    .instructor-card,
+    .gallery-item {
       background: var(--card);
       border-radius: 18px;
       overflow: hidden;
@@ -495,7 +497,8 @@
     }
 
     .facility-card:hover,
-    .instructor-card:hover {
+    .instructor-card:hover,
+    .gallery-item:hover {
       transform: perspective(900px)
         rotateX(var(--rx, 0deg))
         rotateY(var(--ry, 0deg))
@@ -570,23 +573,9 @@
 
     .gallery-item {
       position: relative;
-      overflow: hidden;
       border-radius: 16px;
-      box-shadow: 0 6px 16px var(--shadow);
-      cursor: pointer;
       transform-style: preserve-3d;
       will-change: transform;
-      transition: transform 0.5s var(--spring), box-shadow 0.5s ease;
-      background: var(--card);
-    }
-
-    .gallery-item:hover {
-      transform: perspective(850px)
-        rotateX(var(--rx, 0deg))
-        rotateY(var(--ry, 0deg))
-        translateY(-10px)
-        scale(1.06);
-      box-shadow: 0 22px 45px rgba(0, 0, 0, 0.22);
     }
 
     .gallery-item img {
@@ -670,16 +659,6 @@
       background: var(--bg);
     }
 
-    .instructor-card {
-      background: var(--card);
-      border-radius: 18px;
-      overflow: hidden;
-      text-align: center;
-      box-shadow: 0 8px 24px var(--shadow);
-      transition: transform 0.5s var(--spring), box-shadow 0.5s ease;
-      cursor: pointer;
-    }
-
     .instructor-img {
       width: 100%;
       height: 320px;
@@ -707,6 +686,7 @@
       position: relative;
       z-index: 3;
       background: var(--card);
+      text-align: center;
     }
 
     .instructor-info h3 {
@@ -1178,7 +1158,7 @@
   <header>
     <a href="#home" class="brand-link">
       <img src="./sti-logo.png" alt="STI Logo" class="brand-logo" />
-      <div class="logo">STI College</div>
+      <div class="logo">STI College Facilities</div>
     </a>
 
     <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu">☰</button>
@@ -1394,6 +1374,38 @@
       </div>
 
       <div class="instructor-card">
+        <img src="./Dexter Belarmino.jpg" alt="Dexter Belarmino" class="instructor-img" />
+        <div class="instructor-info">
+          <h3>Dexter Belarmino</h3>
+          <p>STI Instructor</p>
+        </div>
+      </div>
+
+      <div class="instructor-card">
+        <img src="./Francis Matthew Acedera.jpg" alt="Francis Matthew Acedera" class="instructor-img" />
+        <div class="instructor-info">
+          <h3>Francis Matthew Acedera</h3>
+          <p>STI Instructor</p>
+        </div>
+      </div>
+
+      <div class="instructor-card">
+        <img src="./Danyca Alliah Villanueva.jpg" alt="Danyca Alliah Villanueva" class="instructor-img" />
+        <div class="instructor-info">
+          <h3>Danyca Alliah Villanueva</h3>
+          <p>STI Instructor</p>
+        </div>
+      </div>
+
+      <div class="instructor-card">
+        <img src="./Joie Mar Coral.jpg" alt="Joie Mar Coral" class="instructor-img" />
+        <div class="instructor-info">
+          <h3>Joie Mar Coral</h3>
+          <p>STI Instructor</p>
+        </div>
+      </div>
+
+      <div class="instructor-card">
         <img src="./Kyla Cassandra Escriba.jpg" alt="Kyla Cassandra Escriba" class="instructor-img" />
         <div class="instructor-info">
           <h3>Kyla Cassandra Escriba</h3>
@@ -1456,7 +1468,7 @@
   <footer>
     <div class="footer-content">
       <div>
-        <div class="footer-brand">STI College</div>
+        <div class="footer-brand">STI College Facilities</div>
         <div class="footer-note">Facilities Website</div>
       </div>
 
