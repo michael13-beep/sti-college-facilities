@@ -463,14 +463,6 @@
     }
 
     .facility-card,
-    .instructor-card {
-      position: relative;
-      transform-style: preserve-3d;
-      will-change: transform;
-    }
-
-    .facility-card,
-    .instructor-card,
     .gallery-item {
       background: var(--card);
       border-radius: 18px;
@@ -478,10 +470,12 @@
       box-shadow: 0 8px 24px var(--shadow);
       transition: transform 0.5s var(--spring), box-shadow 0.5s ease, opacity 0.3s ease;
       cursor: pointer;
+      position: relative;
+      transform-style: preserve-3d;
+      will-change: transform;
     }
 
-    .facility-card::before,
-    .instructor-card::before {
+    .facility-card::before {
       content: "";
       position: absolute;
       inset: -80px;
@@ -497,7 +491,6 @@
     }
 
     .facility-card:hover,
-    .instructor-card:hover,
     .gallery-item:hover {
       transform: perspective(900px)
         rotateX(var(--rx, 0deg))
@@ -507,8 +500,7 @@
       box-shadow: 0 22px 45px rgba(0, 0, 0, 0.2);
     }
 
-    .facility-card:hover::before,
-    .instructor-card:hover::before {
+    .facility-card:hover::before {
       opacity: 1;
     }
 
@@ -572,10 +564,7 @@
     }
 
     .gallery-item {
-      position: relative;
       border-radius: 16px;
-      transform-style: preserve-3d;
-      will-change: transform;
     }
 
     .gallery-item img {
@@ -656,16 +645,108 @@
     }
 
     .instructors {
-      background: var(--bg);
+      background:
+        radial-gradient(circle at top left, rgba(255, 213, 0, 0.12), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(0, 59, 143, 0.12), transparent 35%),
+        var(--bg);
+    }
+
+    .instructors-grid {
+      align-items: stretch;
+    }
+
+    .instructor-card {
+      position: relative;
+      padding: 12px;
+      border-radius: 28px;
+      cursor: pointer;
+      overflow: hidden;
+      background:
+        linear-gradient(145deg, rgba(255, 213, 0, 0.18), transparent 35%),
+        linear-gradient(180deg, var(--card), var(--soft-card));
+      border: 1px solid var(--border);
+      box-shadow: 0 14px 35px var(--shadow);
+      transform-style: preserve-3d;
+      will-change: transform;
+      transition:
+        transform 0.5s var(--spring),
+        box-shadow 0.45s ease,
+        border-color 0.35s ease;
+    }
+
+    .instructor-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          circle at var(--mx, 50%) var(--my, 50%),
+          rgba(255, 213, 0, 0.22),
+          transparent 35%
+        );
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .instructor-card:hover {
+      transform: perspective(900px)
+        rotateX(var(--rx, 0deg))
+        rotateY(var(--ry, 0deg))
+        translateY(-14px)
+        scale(1.025);
+      border-color: rgba(255, 213, 0, 0.85);
+      box-shadow: 0 28px 60px rgba(0, 31, 77, 0.28);
+    }
+
+    .instructor-card:hover::before {
+      opacity: 1;
+    }
+
+    .instructor-image-wrap {
+      position: relative;
+      height: 320px;
+      overflow: hidden;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #003b8f, #001f4d);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+
+    .instructor-image-wrap::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, transparent 55%, rgba(0, 20, 50, 0.48)),
+        radial-gradient(circle at top right, rgba(255, 213, 0, 0.2), transparent 35%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .instructor-school-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 4;
+      background: var(--gold);
+      color: #003b8f;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.7px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
     }
 
     .instructor-img {
       width: 100%;
-      height: 320px;
+      height: 100%;
       object-fit: cover;
       object-position: center top;
       display: block;
-      transition: transform 0.6s var(--soft), filter 0.6s ease;
+      transition: transform 0.65s var(--soft), filter 0.65s ease;
     }
 
     .euencis-img {
@@ -677,40 +758,72 @@
     }
 
     .instructor-card:hover .instructor-img {
-      transform: scale(1.1);
-      filter: saturate(1.12) contrast(1.04);
+      transform: scale(1.08);
+      filter: saturate(1.1) contrast(1.05);
     }
 
     .instructor-info {
-      padding: 22px;
       position: relative;
       z-index: 3;
-      background: var(--card);
+      margin: -26px 10px 4px;
+      padding: 22px 16px 20px;
       text-align: center;
+      border-radius: 20px;
+
+      background:
+        linear-gradient(135deg, #eaf3ff 0%, #f5f9ff 48%, #fff3b8 100%);
+      border: 1px solid rgba(0, 59, 143, 0.16);
+      box-shadow: 0 14px 25px rgba(0, 59, 143, 0.14);
+      backdrop-filter: blur(10px);
+    }
+
+    body.dark-mode .instructor-info {
+      background:
+        linear-gradient(135deg, rgba(15, 31, 51, 0.96), rgba(16, 36, 59, 0.92));
+      border-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 14px 25px rgba(0, 0, 0, 0.32);
     }
 
     .instructor-info h3 {
       color: var(--blue);
-      font-size: 21px;
-      margin-bottom: 6px;
+      font-size: 20px;
+      margin-bottom: 10px;
+      line-height: 1.25;
     }
 
-    .instructor-info p {
+    .instructor-role {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.65);
+      color: #4b5563;
+      font-size: 14px;
+      font-weight: bold;
+      border: 1px solid rgba(0, 59, 143, 0.14);
+    }
+
+    body.dark-mode .instructor-role {
+      background: var(--soft-card);
       color: var(--muted);
-      font-size: 15px;
-      margin-bottom: 6px;
+      border-color: var(--border);
     }
 
     .instructor-badge {
       display: inline-block;
-      margin-top: 6px;
+      margin-top: 10px;
       background: var(--gold);
       color: #003b8f !important;
-      padding: 6px 12px;
+      padding: 7px 13px;
       border-radius: 20px;
       font-size: 14px !important;
       font-weight: bold;
       box-shadow: 0 8px 18px rgba(255, 213, 0, 0.35);
+    }
+
+    .featured-instructor {
+      border-color: rgba(255, 213, 0, 0.65);
     }
 
     .reminders-list {
@@ -1059,7 +1172,7 @@
         border-radius: 20px;
       }
 
-      .instructor-img {
+      .instructor-image-wrap {
         height: 280px;
       }
 
@@ -1107,7 +1220,7 @@
         height: 200px;
       }
 
-      .instructor-img {
+      .instructor-image-wrap {
         height: 250px;
       }
 
@@ -1314,7 +1427,7 @@
   <section class="gallery" id="gallery">
     <div class="section-title">
       <h2>Facility Gallery</h2>
-      <p>Click any image to view it in a larger preview with a smooth transition and caption.</p>
+      <p>Explore the different areas of STI College through photos that showcase its learning spaces, student services, and campus environment.</p>
     </div>
 
     <div class="gallery-grid">
@@ -1360,64 +1473,85 @@
 
   <section class="instructors" id="instructors">
     <div class="section-title">
-      <h2>Our Instructors</h2>
+      <h2>IT Instructors</h2>
       <p>Meet the instructors who guide and support students in their academic learning.</p>
     </div>
 
     <div class="instructors-grid">
       <div class="instructor-card">
-        <img src="./Euencis Palmones.jpg" alt="Euencis Palmones" class="instructor-img euencis-img" />
+        <div class="instructor-image-wrap">
+          <span class="instructor-school-badge">STI</span>
+          <img src="./Euencis Palmones.jpg" alt="Euencis Palmones" class="instructor-img euencis-img" />
+        </div>
         <div class="instructor-info">
           <h3>Euencis Palmones</h3>
-          <p>STI Instructor</p>
+          <p class="instructor-role">Instructor</p>
         </div>
       </div>
 
       <div class="instructor-card">
-        <img src="./Dexter Belarmino.jpg" alt="Dexter Belarmino" class="instructor-img" />
+        <div class="instructor-image-wrap">
+          <span class="instructor-school-badge">STI</span>
+          <img src="./Dexter Belarmino.jpg" alt="Dexter Belarmino" class="instructor-img" />
+        </div>
         <div class="instructor-info">
           <h3>Dexter Belarmino</h3>
-          <p>STI Instructor</p>
+          <p class="instructor-role">Instructor</p>
         </div>
       </div>
 
       <div class="instructor-card">
-        <img src="./Francis Matthew Acedera.jpg" alt="Francis Matthew Acedera" class="instructor-img" />
+        <div class="instructor-image-wrap">
+          <span class="instructor-school-badge">STI</span>
+          <img src="./Francis Matthew Acedera.jpg" alt="Francis Matthew Acedera" class="instructor-img" />
+        </div>
         <div class="instructor-info">
           <h3>Francis Matthew Acedera</h3>
-          <p>STI Instructor</p>
+          <p class="instructor-role">Instructor</p>
         </div>
       </div>
 
       <div class="instructor-card">
-        <img src="./Danyca Alliah Villanueva.jpg" alt="Danyca Alliah Villanueva" class="instructor-img" />
+        <div class="instructor-image-wrap">
+          <span class="instructor-school-badge">STI</span>
+          <img src="./Danyca Alliah Villanueva.jpg" alt="Danyca Alliah Villanueva" class="instructor-img" />
+        </div>
         <div class="instructor-info">
           <h3>Danyca Alliah Villanueva</h3>
-          <p>STI Instructor</p>
+          <p class="instructor-role">Instructor</p>
         </div>
       </div>
 
       <div class="instructor-card">
-        <img src="./Joie Mar Coral.jpg" alt="Joie Mar Coral" class="instructor-img" />
+        <div class="instructor-image-wrap">
+          <span class="instructor-school-badge">STI</span>
+          <img src="./Joie Mar Coral.jpg" alt="Joie Mar Coral" class="instructor-img" />
+        </div>
         <div class="instructor-info">
           <h3>Joie Mar Coral</h3>
-          <p>STI Instructor</p>
+          <p class="instructor-role">Instructor</p>
         </div>
       </div>
 
       <div class="instructor-card">
-        <img src="./Kyla Cassandra Escriba.jpg" alt="Kyla Cassandra Escriba" class="instructor-img" />
+        <div class="instructor-image-wrap">
+          <span class="instructor-school-badge">STI</span>
+          <img src="./Kyla Cassandra Escriba.jpg" alt="Kyla Cassandra Escriba" class="instructor-img" />
+        </div>
         <div class="instructor-info">
           <h3>Kyla Cassandra Escriba</h3>
-          <p>STI Instructor</p>
+          <p class="instructor-role">Instructor</p>
         </div>
       </div>
 
-      <div class="instructor-card">
-        <img src="./Jon Philip Daludado.jpg" alt="Jon Philip Daludado" class="instructor-img philip-img" />
+      <div class="instructor-card featured-instructor">
+        <div class="instructor-image-wrap">
+          <span class="instructor-school-badge">STI</span>
+          <img src="./Jon Philip Daludado.jpg" alt="Jon Philip Daludado" class="instructor-img philip-img" />
+        </div>
         <div class="instructor-info">
           <h3>Jon Philip Daludado</h3>
-          <p>STI Instructor</p>
+          <p class="instructor-role">Instructor</p>
           <p class="instructor-badge">Best Instructor in STI</p>
         </div>
       </div>
